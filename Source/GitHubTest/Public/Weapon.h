@@ -26,5 +26,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rain Mesh")
 	UStaticMeshComponent* Mesh;
 
-	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+
 };
