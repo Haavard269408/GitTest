@@ -6,8 +6,12 @@
 #include "GameFramework/Character.h"
 #include "MyCharacter.generated.h"
 
-
+class UInputMappingContext;
+struct FInputActionValue;
+class UInputComponent;
 class UInputAction;
+class UCameraComponent;
+
 
 UCLASS()
 class GITHUBTEST_API AMyCharacter : public ACharacter
@@ -18,9 +22,29 @@ public:
 	// Sets default values for this character's properties
 	AMyCharacter();
 
+	/*
+	 * Components
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UCameraComponent* CameraComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USkeletalMeshComponent* hfj_mesh;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UInputMappingContext* IMC;
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	UInputAction* MoveAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UInputAction* LookAction;
+
+	void Move(const FInputActionValue& Value);
+
+	void LookAround(const FInputActionValue& Value);
 
 protected:
 	// Called when the game starts or when spawned
