@@ -46,6 +46,19 @@ void AMyCharacter::BeginPlay()
 	
 }
 
+void AMyCharacter::LookAround(const FInputActionValue& Value)
+{
+
+	FVector2D LookAroundVector = Value.Get<FVector2D>();
+
+	if (Controller != nullptr)
+	{
+		AddControllerYawInput(LookAroundVector.X);
+		AddControllerPitchInput(LookAroundVector.Y);
+	}
+
+}
+
 
 void AMyCharacter::Move(const FInputActionValue& Value)
 {
@@ -79,7 +92,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyCharacter::Move);
 		
-
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMyCharacter::LookAround);
 	}
 
 
