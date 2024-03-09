@@ -17,6 +17,14 @@ ASpawnManager::ASpawnManager()
 void ASpawnManager::BeginPlay()
 {
 	Super::BeginPlay();
+
+	float SpawnX = FMath::RandRange(0.0f, 1000.0f);
+	float SpawnY = FMath::RandRange(0.f, 0.f);
+
+	float SpawnZ = 1.0f; // Spawn above the ground
+	FVector SpawnPosition = FVector(SpawnX, SpawnY, SpawnZ);
+
+	GetWorld()->SpawnActor<AWeapon>(WeaponClass, SpawnPosition, FRotator::ZeroRotator);
 	
 }
 
@@ -25,13 +33,7 @@ void ASpawnManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	float SpawnX = FMath::RandRange(50.0f, 100.0f);
-	float SpawnY = FMath::RandRange(0.f,0.f);
-	
-	float SpawnZ = 1000.0f; // Spawn above the ground
-	FVector SpawnPosition = FVector(SpawnX, SpawnY, SpawnZ);
 
-	GetWorld()->SpawnActor<AWeapon>(WeaponClass, SpawnPosition, FRotator::ZeroRotator);
 
 
 
