@@ -5,7 +5,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputAction.h"
-
+#include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Camera/CameraComponent.h"
 
@@ -25,6 +25,14 @@ AMyCharacter::AMyCharacter()
 	/*Skeletal Mesh Component*/
 	hfj_mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharMesh"));
 	hfj_mesh->SetupAttachment(CameraComponent);
+
+
+	/* Hent alle UBoxComponent-komponenter */
+	TArray<UBoxComponent*> BoxComponents;
+	GetComponents<UBoxComponent>(BoxComponents);
+
+
+
 }
 
 
