@@ -59,6 +59,13 @@ void AMyCharacter::LookAround(const FInputActionValue& Value)
 
 }
 
+void AMyCharacter::Hit()
+{
+	GEngine->AddOnScreenDebugMessage(1, 3.0f, FColor::Black, TEXT("Hitting"));
+
+
+}
+
 
 void AMyCharacter::Move(const FInputActionValue& Value)
 {
@@ -97,6 +104,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+
+		EnhancedInputComponent->BindAction(HitAction, ETriggerEvent::Triggered, this, &AMyCharacter::Hit);
 
 	}
 

@@ -12,6 +12,8 @@ AWeapon::AWeapon()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	RootComponent = Mesh;
 
+	SphereCollision = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionMesh"));
+	
 
 }
 
@@ -26,6 +28,19 @@ void AWeapon::BeginPlay()
 void AWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+}
+
+void AWeapon::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor)
+	{
+		// Log information about the overlapped actor
+		FString ActorName = OtherActor->GetName();
+		FVector ActorLocation = OtherActor->GetActorLocation();
+
+		UE_LOG(LogTemp, Warning, TEXT("Collision with actor %s at location %s"), *ActorName, *ActorLocation.ToString());
+	}
 
 }
 
