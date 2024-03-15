@@ -22,9 +22,16 @@ AMyCharacter::AMyCharacter()
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
 	CameraComponent->bUsePawnControlRotation = true;
 
+
 	/*Skeletal Mesh Component*/
 	hfj_mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharMesh"));
 	hfj_mesh->SetupAttachment(CameraComponent);
+
+	//weapon mesh
+	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Weapon"));
+	WeaponMesh->SetupAttachment(CameraComponent);
+
+	bHasWeapon = false;
 }
 
 
@@ -59,6 +66,13 @@ void AMyCharacter::LookAround(const FInputActionValue& Value)
 
 }
 
+
+
+void AMyCharacter::SetWeaponHidden()
+{
+	WeaponMesh->SetHiddenInGame(false);
+
+}
 
 void AMyCharacter::Move(const FInputActionValue& Value)
 {

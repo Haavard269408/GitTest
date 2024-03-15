@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-
+#include "MyCharacter.h"
 #include "Weapon.generated.h"
 
-class UBoxComponent;
+class USphereComponent;
+class USkeletalMeshComponent;
 
 UCLASS()
 class GITHUBTEST_API AWeapon : public AActor
@@ -26,10 +27,20 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rain Mesh")
-	USkeletalMeshComponent* Mesh;
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* WeaponMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rain Mesh")
-	UBoxComponent* CollisionBox;
+	USphereComponent* CollisionSphere;
+
+	UPROPERTY(EditAnywhere)
+	AMyCharacter* Character;
+
+	UFUNCTION()
+	void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 
 };
