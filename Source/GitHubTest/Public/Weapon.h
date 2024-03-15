@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
 #include "Weapon.generated.h"
+
+class UBoxComponent;
 
 UCLASS()
 class GITHUBTEST_API AWeapon : public AActor
@@ -24,7 +27,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rain Mesh")
-	UStaticMeshComponent* Mesh;
+	USkeletalMeshComponent* Mesh;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rain Mesh")
+	UBoxComponent* CollisionBox;
 
 };

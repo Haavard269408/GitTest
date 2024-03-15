@@ -18,10 +18,10 @@ void ASpawnManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	float SpawnX = FMath::RandRange(0.0f, 1000.0f);
-	float SpawnY = FMath::RandRange(0.f, 0.f);
-
+	float SpawnX = FMath::RandRange(-1000.f, 1000.0f);
+	float SpawnY = FMath::RandRange(-1000.f, 1000.f);
 	float SpawnZ = 1.0f; // Spawn above the ground
+
 	FVector SpawnPosition = FVector(SpawnX, SpawnY, SpawnZ);
 
 	GetWorld()->SpawnActor<AWeapon>(WeaponClass, SpawnPosition, FRotator::ZeroRotator);
