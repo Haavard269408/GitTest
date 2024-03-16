@@ -6,7 +6,6 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputAction.h"
 #include "Weapon.h"
-#include "Projectile.h"
 #include "Components/CapsuleComponent.h"
 #include "Camera/CameraComponent.h"
 
@@ -68,19 +67,23 @@ void AMyCharacter::LookAround(const FInputActionValue& Value)
 
 void AMyCharacter::Fire()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Firing");
 
-	
-	if (bHasWeapon) {
-		
+	if (ProjectileToSpawn != nullptr)
+	{
 		UWorld* World = GetWorld();
-
-		if (ProjectileToSpawn != nullptr)
+		if (World != nullptr)
 		{
-			World->SpawnActor<AActor>(ProjectileToSpawn, GetActorLocation() +
-				GetActorForwardVector() * 100.f + FVector(0.f, 0.f, SpawnZOffset), GetActorRotation());
+
+			FRotator SpawnRotation = GetViewRotation();
+			FVector SpawnLocation = GetOwner()->GetActorLocation();
+
+			FActorSpawnParameters ActorSpawnParams;
+			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+
+			World->SpawnActor<AActor>(ProjectileToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
 		}
 	}
-	
 }
 
 
@@ -127,7 +130,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyCharacter::Move);
 		
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMyCharacter::LookAround);
-		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &AMyCharacter::Fire);
+
 
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);

@@ -30,17 +30,32 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* WeaponMesh;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rain Mesh")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collider")
 	USphereComponent* CollisionSphere;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
 	AMyCharacter* Character;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Settings")
+	FVector GunTipOffset;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UInputAction* FireAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputMappingContext* WeaponIMC;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile")
+	TSubclassOf<AActor> ProjectileToSpawn;
+
 
 	UFUNCTION()
 	void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
 	void OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	void Fire();
 
 
 };
