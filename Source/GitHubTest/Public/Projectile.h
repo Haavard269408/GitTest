@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+class USphereComponent;
+
 UCLASS()
 class GITHUBTEST_API AProjectile : public AActor
 {
@@ -26,6 +28,13 @@ public:
 	// initital speed 5000, can change speed in blueprint
 	UPROPERTY(EditAnywhere, Category = "Bullet")
 	float Speed{ 4000.0f };
+
+	UPROPERTY(EditAnywhere, Category = "Bullet")
+	USphereComponent* SphereCollider;
+
+	UFUNCTION()
+	void OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 
 	/**Time before bullet selfdestruct*/
 	UPROPERTY(EditAnywhere, Category = "Bullet")

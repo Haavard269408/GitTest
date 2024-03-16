@@ -76,9 +76,9 @@ void AMyCharacter::Fire()
 
 		if (ProjectileToSpawn != nullptr)
 		{
-			FVector spawn = WeaponReference->GetActorLocation();
+			FVector spawn = WeaponMesh->GetComponentLocation();
 
-			World->SpawnActor<AActor>(ProjectileToSpawn, GetActorLocation() +
+			World->SpawnActor<AActor>(ProjectileToSpawn, spawn +
 				GetActorForwardVector() * 100.f, GetActorRotation());
 		}
 	}

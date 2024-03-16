@@ -20,8 +20,7 @@ AProjectile::AProjectile()
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-    SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnSphereBeginOverlap);
-
+	
 }
 
 // Called every frame
@@ -51,8 +50,6 @@ void AProjectile::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent,
     {
         // Print out the name of the OtherActor
         UE_LOG(LogTemp, Warning, TEXT("Projectile overlapped with actor: %s"), *OtherActor->GetName());
-        OtherActor->Destroy();
-
     }
 }
 
