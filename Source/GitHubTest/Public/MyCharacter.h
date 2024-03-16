@@ -58,8 +58,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile")
 	TSubclassOf<AActor> ProjectileToSpawn;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile Setup")
-	float SpawnZOffset = 10.f;
 
 	bool bHasWeapon;
 

@@ -76,6 +76,8 @@ void AMyCharacter::Fire()
 
 		if (ProjectileToSpawn != nullptr)
 		{
+			FVector spawn = WeaponReference->GetActorLocation();
+
 			World->SpawnActor<AActor>(ProjectileToSpawn, GetActorLocation() +
 				GetActorForwardVector() * 100.f + FVector(0.f, 0.f, SpawnZOffset), GetActorRotation());
 		}
@@ -87,7 +89,7 @@ void AMyCharacter::Fire()
 void AMyCharacter::SetWeaponHidden()
 {
 	WeaponMesh->SetHiddenInGame(false);
-
+	
 	//run constructor 
 	//WeaponReference->~AWeapon();
 
