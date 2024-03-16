@@ -79,7 +79,7 @@ void AMyCharacter::Fire()
 			FVector spawn = WeaponReference->GetActorLocation();
 
 			World->SpawnActor<AActor>(ProjectileToSpawn, GetActorLocation() +
-				GetActorForwardVector() * 100.f + FVector(0.f, 0.f, SpawnZOffset), GetActorRotation());
+				GetActorForwardVector() * 100.f, GetActorRotation());
 		}
 	}
 	
