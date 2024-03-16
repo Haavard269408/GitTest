@@ -7,6 +7,7 @@
 #include "Projectile.generated.h"
 
 class USphereComponent;
+class AMyCharacter;
 
 UCLASS()
 class GITHUBTEST_API AProjectile : public AActor
@@ -31,6 +32,10 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Bullet")
 	USphereComponent* SphereCollider;
+
+	UPROPERTY(EditAnywhere)
+	AMyCharacter* Character;
+
 
 	UFUNCTION()
 	void OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

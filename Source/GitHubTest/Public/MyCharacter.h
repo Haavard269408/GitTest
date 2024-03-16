@@ -58,6 +58,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile")
 	TSubclassOf<AActor> ProjectileToSpawn;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	FVector MuzzleOffset;
 
 	bool bHasWeapon;
 

@@ -91,8 +91,6 @@ void AWeapon::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 void AWeapon::Fire()
 {
-	
-
 
 
 }

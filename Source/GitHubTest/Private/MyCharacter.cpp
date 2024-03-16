@@ -76,10 +76,32 @@ void AMyCharacter::Fire()
 
 		if (ProjectileToSpawn != nullptr)
 		{
-			FVector spawn = WeaponMesh->GetComponentLocation();
+			
+			FVector CameraLocation;
+			FRotator CameraRotation;
+			GetActorEyesViewPoint(CameraLocation, CameraRotation);
 
-			World->SpawnActor<AActor>(ProjectileToSpawn, spawn +
-				GetActorForwardVector() * 100.f, GetActorRotation());
+
+			// Skew the aim to be slightly upwards.
+			FRotator MuzzleRotation = CameraRotation;
+			MuzzleRotation.Pitch += 1.0f;
+
+			// Set MuzzleOffset to spawn projectiles slightly in front of the camera.
+			MuzzleOffset.Set(100.0f, 0.0f, 0.0f);
+
+			// Transform MuzzleOffset from camera space to world space.
+			FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
+
+
+			WeaponReference->Fire();
+
+			FActorSpawnParameters SpawnParams;
+			SpawnParams.Owner = this;
+			SpawnParams.Instigator = GetInstigator();
+
+			// Spawn the projectile at the muzzle.
+			AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileToSpawn, MuzzleLocation, MuzzleRotation, SpawnParams);
+
 		}
 	}
 	

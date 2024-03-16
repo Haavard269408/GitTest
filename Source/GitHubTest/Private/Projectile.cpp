@@ -29,7 +29,6 @@ void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-    Super::Tick(DeltaTime);
 
     FVector NewLocation = GetActorLocation();
     NewLocation += GetActorForwardVector() * Speed * DeltaTime;
@@ -47,11 +46,16 @@ void AProjectile::Tick(float DeltaTime)
 void AProjectile::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     // Check if the OtherActor is valid
-    if (OtherActor && OtherActor != this)
+    if (OtherActor && OtherActor !=this)
     {
+        AMyCharacter* character;
         // Print out the name of the OtherActor
         UE_LOG(LogTemp, Warning, TEXT("Projectile overlapped with actor: %s"), *OtherActor->GetName());
+        
+        AActor* name = this->GetInstigator();
+
         OtherActor->Destroy();
+        
 
     }
 }
