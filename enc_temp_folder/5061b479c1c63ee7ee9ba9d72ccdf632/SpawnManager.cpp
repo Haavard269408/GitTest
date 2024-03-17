@@ -9,9 +9,7 @@ ASpawnManager::ASpawnManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	EnemiesToSpawn = 5;
-	CurrentNumOfEnemies = 0;
+	TimeToLive = 5.0f;
 
 }
 
@@ -20,23 +18,6 @@ void ASpawnManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-
-	
-}
-
-// Called every frame
-void ASpawnManager::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-	while (CurrentNumOfEnemies <= EnemiesToSpawn) {
-		Spawn();
-	}
-
-}
-
-void ASpawnManager::Spawn()
-{
 	float SpawnX = FMath::RandRange(-1000.f, 1000.0f);
 	float SpawnY = FMath::RandRange(-1000.f, 1000.f);
 	float SpawnZ = 1.0f; // Spawn above the ground
@@ -45,7 +26,16 @@ void ASpawnManager::Spawn()
 
 	GetWorld()->SpawnActor<AActor>(EnemyClass, SpawnPosition, FRotator::ZeroRotator);
 	
-	CurrentNumOfEnemies++;
+}
+
+// Called every frame
+void ASpawnManager::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+
+
+
 
 }
 

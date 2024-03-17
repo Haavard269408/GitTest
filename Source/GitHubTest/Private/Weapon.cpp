@@ -21,10 +21,6 @@ AWeapon::AWeapon()
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
 	WeaponMesh->SetupAttachment(GetRootComponent());
 
-	GunTipOffset = FVector(100.0f, 0.0f, 10.0f);
-
-	
-
 
 }
 
@@ -78,6 +74,8 @@ void AWeapon::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 		Destroy();
 
 		playerCharacter->SetWeaponHidden();
+		
+
 		
 	}
 

@@ -20,8 +20,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Spawn Setup")
 	TSubclassOf<class AActor> EnemyClass;
 
-	int EnemiesToSpawn;
-	int CurrentNumOfEnemies;
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,7 +31,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 
-	void Spawn();
 
 
 

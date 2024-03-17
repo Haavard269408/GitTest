@@ -48,13 +48,16 @@ void AProjectile::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent,
     // Check if the OtherActor is valid
     if (OtherActor && OtherActor !=this)
     {
-        AMyCharacter* character;
+        
         // Print out the name of the OtherActor
         UE_LOG(LogTemp, Warning, TEXT("Projectile overlapped with actor: %s"), *OtherActor->GetName());
         
-        AActor* name = this->GetInstigator();
+        AActor* ThisOwner = this->GetInstigator();
 
-        OtherActor->Destroy();
+        if (OtherActor != ThisOwner) {
+            OtherActor->Destroy();
+        }
+       
         
 
     }
