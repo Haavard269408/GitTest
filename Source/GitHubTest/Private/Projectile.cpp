@@ -2,6 +2,7 @@
 
 
 #include "Projectile.h"
+#include "SpawnManager.h"
 #include "Components/SphereComponent.h"
 
 // Sets default values
@@ -13,6 +14,8 @@ AProjectile::AProjectile()
     SphereCollider = CreateDefaultSubobject<USphereComponent>(TEXT("ColliderBox"));
     SphereCollider->SetupAttachment(GetRootComponent());
 
+  
+
 
 }
 
@@ -22,12 +25,14 @@ void AProjectile::BeginPlay()
 	Super::BeginPlay();
     SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnSphereBeginOverlap);
 
+    
 }
 
 // Called every frame
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 
 
     FVector NewLocation = GetActorLocation();

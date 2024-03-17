@@ -35,10 +35,15 @@ void ASpawnManager::Tick(float DeltaTime)
 
 }
 
+int ASpawnManager::GetNumOfEnemies()
+{
+	return CurrentNumOfEnemies;
+}
+
 void ASpawnManager::Spawn()
 {
-	float SpawnX = FMath::RandRange(-1000.f, 1000.0f);
-	float SpawnY = FMath::RandRange(-1000.f, 1000.f);
+	float SpawnX = FMath::RandRange(-3000.f, 3000.0f);
+	float SpawnY = FMath::RandRange(-3000.f, 2000.f);
 	float SpawnZ = 1.0f; // Spawn above the ground
 
 	FVector SpawnPosition = FVector(SpawnX, SpawnY, SpawnZ);
